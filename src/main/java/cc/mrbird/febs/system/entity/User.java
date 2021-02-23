@@ -147,11 +147,11 @@ public class User implements Serializable, Cloneable {
     private Date lastLoginTime;
 
     /**
-     * 性别 0男 1女 2 保密
+     * 性别 0男 1女 2 未知
      */
     @TableField("SSEX")
     @NotBlank(message = "{required}")
-    @ExcelField(value = "性别", writeConverterExp = "0=男,1=女,2=保密")
+    @ExcelField(value = "性别", writeConverterExp = "0=男,1=女,2=未知")
     private String sex;
 
     /**

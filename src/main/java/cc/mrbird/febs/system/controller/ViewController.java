@@ -168,7 +168,7 @@ public class ViewController extends BaseController {
                     user.setSex("女");
                     break;
                 default:
-                    user.setSex("保密");
+                    user.setSex("未知");
                     break;
             }
         }

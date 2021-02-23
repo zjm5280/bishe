@@ -48,7 +48,7 @@ public class FebsStartedUpRunner implements ApplicationRunner {
             log.info("/ /`  / / \\ | |\\/| | |_) | |   | |_   | |  | |_  ");
             log.info("\\_\\_, \\_\\_/ |_|  | |_|   |_|__ |_|__  |_|  |_|__ ");
             log.info("                                                      ");
-            log.info("FEBS权限系统启动完毕，系统编译打包时间：{}，地址：{}", DateUtil.formatUtcTime(packageTime), url);
+            log.info("医养中心系统启动完毕，系统编译打包时间：{}，地址：{}", DateUtil.formatUtcTime(packageTime), url);
         }
     }
 }

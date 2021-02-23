@@ -16,6 +16,6 @@ public class FebsShutDownHook {
 
     @EventListener(classes = {ContextClosedEvent.class})
     public void onFebsApplicationClosed(@NonNull ApplicationEvent event) {
-        log.info("FEBS系统已关闭，Bye");
+        log.info("医养中心系统已关闭，Bye");
     }
 }
