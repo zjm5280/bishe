@@ -131,7 +131,7 @@
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
             <div class="layui-card">
                 <div class="layui-card-body">
-                    <table class="project-table">
+                    <table class="project-table" style="height: 380px">
                         <tr>
                             <td style="padding: .8rem;">进行中的项目</td>
                             <td style="padding: .8rem;text-align: right">
@@ -284,19 +284,8 @@
         function handleSuccess(data) {
             let hour = new Date().getHours();
             let time = hour < 6 ? '早上好' : (hour <= 11 ? '上午好' : (hour <= 13 ? '中午好' : (hour <= 18 ? '下午好' : '晚上好')));
-            let welcomeArr = [
-                '喝杯咖啡休息下吧☕',
-                '要不要和朋友打局LOL',
-                '今天又写了几个Bug呢',
-                '今天在群里吹水了吗',
-                '今天吃了什么好吃的呢',
-                '今天您微笑了吗😊',
-                '今天帮助别人了吗',
-                '准备吃些什么呢',
-                '周末要不要去看电影？'
-            ];
-            let index = Math.floor((Math.random() * welcomeArr.length));
-            let welcomeMessage = time + '，<a id="febs-index-user">' + currentUser.username + '</a>，' + welcomeArr[index];
+
+            let welcomeMessage = time + '，<a id="febs-index-user">' + currentUser.username + '</a>！';
             $view.find('#today-ip').text(data.todayIp).end()
                 .find('#today-visit-count').text(data.todayVisitCount).end()
                 .find('#total-visit-count').text(data.totalVisitCount).end()
