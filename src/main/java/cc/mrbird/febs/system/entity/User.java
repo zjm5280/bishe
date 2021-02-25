@@ -52,7 +52,7 @@ public class User implements Serializable, Cloneable {
      */
     public static final String SEX_FEMALE = "1";
     /**
-     * 性别保密
+     * 性别未知
      */
     public static final String SEX_UNKNOW = "2";
     /**
