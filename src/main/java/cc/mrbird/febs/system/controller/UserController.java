@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 /**
  * @author MrBird
@@ -39,7 +41,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("check/{username}")
-    public boolean checkUserName(@NotBlank(message = "{required}") @PathVariable String username, String userId) {
+    public boolean checkUserName(@NotBlank(message = "{required}") @PathVariable String username, String userId){
         return userService.findByName(username) == null || StringUtils.isNotBlank(userId);
     }
 

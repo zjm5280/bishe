@@ -1,0 +1,39 @@
+<div class="layui-fluid layui-anim febs-anim" lay-title="表单组合">
+    <div class="layui-row febs-container">
+        <div class="layui-card-body" style="padding: 20px;">
+            <form class="layui-form" action="" lay-filter="febs-form-group">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-item febs-form-item-require">姓名</label>
+                    <div class="layui-form-block">
+                        <input type="text" class="layui-input" name="name" lay-verify="name" placeholder="请输入姓名">
+                    </div>
+                </div>
+
+                <div class="layui-inline">
+                    <label class="layui-form-item febs-form-item-require">年龄</label>
+                    <div class="layui-form-block">
+                        <input type="text" class="layui-input" name="age" lay-verify="age" placeholder="请输入年龄">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['febs', 'form', 'laydate'], function () {
+        let $ = layui.$,
+            febs = layui.febs,
+            element = layui.element,
+            layer = layui.layer,
+            laydate = layui.laydate,
+            form = layui.form;
+
+        form.render(null, 'febs-form-group');
+
+        laydate.render({
+            elem: '#febs-form-group-date'
+        });
+    });
+</script>
