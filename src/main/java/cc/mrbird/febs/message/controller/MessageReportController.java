@@ -1,13 +1,18 @@
 package cc.mrbird.febs.message.controller;
 
 import cc.mrbird.febs.common.annotation.ControllerEndpoint;
+import cc.mrbird.febs.common.exception.FebsException;
 import cc.mrbird.febs.common.utils.FebsUtil;
 import cc.mrbird.febs.common.entity.FebsConstant;
 import cc.mrbird.febs.common.controller.BaseController;
 import cc.mrbird.febs.common.entity.FebsResponse;
 import cc.mrbird.febs.common.entity.QueryRequest;
+import cc.mrbird.febs.common.utils.UUIDutil;
 import cc.mrbird.febs.message.entity.Message;
 import cc.mrbird.febs.message.service.IMessageService;
+import cc.mrbird.febs.system.entity.User;
+import cc.mrbird.febs.system.service.IRoleService;
+import cc.mrbird.febs.system.service.IUserService;
 import com.wuwenze.poi.ExcelKit;
 import lombok.extern.slf4j.Slf4j;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,15 +45,17 @@ import java.util.Map;
 public class MessageReportController extends BaseController {
 
     private final IMessageService messageService;
+    private final IRoleService roleService;
+    private final IUserService userService;
 
-    @GetMapping("message")
+    @GetMapping("messages")
     @ResponseBody
     @RequiresPermissions("message:list")
     public FebsResponse getAllMessages(Message message) {
         return new FebsResponse().success().data(messageService.findMessages(message));
     }
 
-    @GetMapping("message/list")
+    @GetMapping("list")
     @ResponseBody
     @RequiresPermissions("message:list")
     public FebsResponse messageList(QueryRequest request, Message message) {
@@ -60,8 +68,30 @@ public class MessageReportController extends BaseController {
     @ResponseBody
     @RequiresPermissions("message:add")
     public FebsResponse addMessage(@Valid Message message) {
+        message.setMessageId(UUIDutil.getUUID());
+        message.setLoginName(getCurrentUser().getUsername());
+        message.setStatus("0");
+        message.setCreateTime(new Date());
+        message.setUpdateTime(null);
         this.messageService.createMessage(message);
         return new FebsResponse().success();
+    }
+
+    @ControllerEndpoint(operation = "获取状态", exceptionMessage = "获取状态失败")
+    @ResponseBody
+    @PostMapping("getStatus")
+    public FebsResponse getStatus(String identity, String phone){
+        String status = this.messageService.getStatus(identity, phone);
+        return new FebsResponse().success().data(status);
+    }
+
+    @ControllerEndpoint(operation = "用户名获取状态", exceptionMessage = "用户名获取状态失败")
+    @ResponseBody
+    @GetMapping("getStatusByLoginName")
+    public FebsResponse getStatusByLoginName(){
+        String str = getCurrentUser().getUsername();
+        String status = this.messageService.getStatusByLoginName(str);
+        return new FebsResponse().success().data(status);
     }
 
     @ControllerEndpoint(operation = "删除Message", exceptionMessage = "删除Message失败")
@@ -74,11 +104,17 @@ public class MessageReportController extends BaseController {
     }
 
     @ControllerEndpoint(operation = "修改Message", exceptionMessage = "修改Message失败")
-    @PostMapping("message/update")
+    @PostMapping("audit/update")
     @ResponseBody
     @RequiresPermissions("message:update")
-    public FebsResponse updateMessage(Message message) {
-        this.messageService.updateMessage(message);
+    public FebsResponse updateMessage(@Valid Message message) {
+        if (message.getMessageId() == null){
+            throw new FebsException("信息ID为空");
+        }
+        message.setAuditPerson(getCurrentUser().getUsername());
+        message.setUpdateTime(new Date());
+        messageService.updateMessage(message);
+        roleService.updateUserRole((userService.findByName(message.getName())).getUserId());
         return new FebsResponse().success();
     }
 

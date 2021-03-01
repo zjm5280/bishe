@@ -7,11 +7,13 @@ import cc.mrbird.febs.common.event.UserAuthenticationUpdatedEventPublisher;
 import cc.mrbird.febs.common.utils.SortUtil;
 import cc.mrbird.febs.system.entity.Role;
 import cc.mrbird.febs.system.entity.RoleMenu;
+import cc.mrbird.febs.system.entity.UserRole;
 import cc.mrbird.febs.system.mapper.RoleMapper;
 import cc.mrbird.febs.system.service.IRoleMenuService;
 import cc.mrbird.febs.system.service.IRoleService;
 import cc.mrbird.febs.system.service.IUserRoleService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -103,6 +105,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         if (CollectionUtils.isNotEmpty(userIds)) {
             publisher.publishEvent(userIds);
         }
+    }
+
+    @Override
+    public void updateUserRole(Long userId) {
+        baseMapper.updateUserRole(userId);
     }
 
     private void saveRoleMenus(Role role) {

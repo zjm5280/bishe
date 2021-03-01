@@ -1,27 +1,118 @@
-<div class="layui-fluid layui-anim febs-anim" lay-title="表单组合">
+<div class="layui-fluid layui-anim febs-anim" lay-title="信息上报">
     <div class="layui-row febs-container">
-        <div class="layui-card-body" style="padding: 20px;">
-            <form class="layui-form" action="" lay-filter="febs-form-group">
+        <div class="layui-card">
+            <div class="layui-card-body" style="padding: 20px;">
+                <form class="layui-form" action="" lay-filter="febs-form-group">
 
-                <div class="layui-form-item">
-                    <label class="layui-form-item febs-form-item-require">姓名</label>
-                    <div class="layui-form-block">
-                        <input type="text" class="layui-input" name="name" lay-verify="name" placeholder="请输入姓名">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label febs-form-item-require">姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="name" minlength="2" maxlength="10" lay-verify="required|name" placeholder="请输入姓名">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label febs-form-item-require">年龄</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="age" lay-verify="required|age" placeholder="请输入年龄">
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="layui-inline">
-                    <label class="layui-form-item febs-form-item-require">年龄</label>
-                    <div class="layui-form-block">
-                        <input type="text" class="layui-input" name="age" lay-verify="age" placeholder="请输入年龄">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label febs-form-item-require">性别：</label>
+                        <div class="layui-input-block">
+                            <input type="radio" name="gender" value="0" title="男性">
+                            <input type="radio" name="gender" value="1" title="女性" checked="">
+                        </div>
                     </div>
-                </div>
 
-            </form>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label febs-form-item-require">籍贯</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="nativePlace" lay-verify="required|native_place" placeholder="请输入籍贯">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">民族</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="nation" lay-verify="nation" placeholder="请输入民族">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label febs-form-item-require">身份证号码</label>
+                        <div class="layui-input-block" style="width: 60%">
+                            <input type="text" class="layui-input" name="identity" id="identity" lay-verify="required|identity" placeholder="请输入身份证号码">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label febs-form-item-require">手机号码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="phone" id="phone" lay-verify="required|phone" placeholder="请输入手机号码">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">邮箱</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="email" lay-verify="email" placeholder="请输入邮箱">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label febs-form-item-require">通信地址</label>
+                        <div class="layui-input-block" style="width: 60%">
+                            <input type="text" class="layui-input" name="address" lay-verify="required|address" placeholder="请输入通信地址">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label febs-form-item-require">在住老人</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="elder" minlength="2" maxlength="10" lay-verify="required|elder" placeholder="请输入在住老人">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label febs-form-item-require">关系</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="relation" lay-verify="required|relation" placeholder="请输入关系">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">备注</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入备注" name="remarks" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block" id="btn">
+                            <button class="layui-btn" lay-submit="" lay-filter="message-report-form-submit"
+                                shiro:hasAnyPermissions="message:add">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<style>
+    .layui-form-item{
+        padding-bottom: 15px;
+    }
+</style>
 <script>
+    let status2 = "";
     layui.use(['febs', 'form', 'laydate'], function () {
         let $ = layui.$,
             febs = layui.febs,
@@ -30,10 +121,44 @@
             laydate = layui.laydate,
             form = layui.form;
 
-        form.render(null, 'febs-form-group');
+        form.render();
 
-        laydate.render({
-            elem: '#febs-form-group-date'
+        let btn = $("#btn");
+
+        layui.febs.get(ctx + "message/getStatusByLoginName", null, function (data) {
+            console.log(data.data);
+            if (data.data == "" || data.data == null){debugger
+                btn.show();
+            }else {
+                btn.hide();
+            }
+        })
+
+
+        /* 自定义验证规则 */
+        form.verify({
+            //name: [/^[\u4e00-\u9fa5]{2,6}$/, '姓名必须2~6中文'],
+            age: [/^(?:[1-9][0-9]?|1[01][0-9]|120)$/, '请输入正确的年龄'],
+            native_place: [/^[\u4e00-\u9fa5]{4,7}$/, '请输入正确的籍贯'],
+            phone: [/^1([358][0-9]|4[579]|66|7[0135678]|9[89])[0-9]{8}$/, '请输入正确的手机号码']
         });
+
+        form.on('submit(message-report-form-submit)',  function (data) {
+            febs.post(ctx + 'message/message', data.field, function () {debugger
+                layer.closeAll();
+                febs.alert.success('信息已提交，会在三个工作日内审核，请等待短信通知！');
+                if (status2 == 0){
+                    btn.hide();
+                }
+            });
+            return false;
+        });
+
     });
+
+    function nowStatus(identity, phone) {
+        layui.febs.post(ctx + "message/getStatus", [identity,phone], function (data) {
+            status2 = data;
+        })
+    }
 </script>

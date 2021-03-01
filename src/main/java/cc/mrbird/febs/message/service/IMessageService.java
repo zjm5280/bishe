@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 信息管理表 Service接口
@@ -52,4 +53,27 @@ public interface IMessageService extends IService<Message> {
      * @param message message
      */
     void deleteMessage(Message message);
+
+    /**
+     * 获取状态
+     * @param identity
+     * @param phone
+     * @return
+     */
+    String getStatus(String identity, String phone);
+
+    /**
+     * 根据用户名
+     * @param username
+     * @return
+     */
+    String getStatusByLoginName(String username);
+
+    /**
+     * 通过用户名查找用户
+     *
+     * @param name 用户名
+     * @return 用户
+     */
+    Message findByName(String name);
 }

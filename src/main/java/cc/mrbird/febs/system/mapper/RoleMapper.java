@@ -30,4 +30,11 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @return IPage<User>
      */
     <T> IPage<Role> findRolePage(Page<T> page, @Param("role") Role role);
+
+    /**
+     * 更新注册用户为家属角色
+     * @param userId
+     * @return
+     */
+    Long updateUserRole(long userId);
 }

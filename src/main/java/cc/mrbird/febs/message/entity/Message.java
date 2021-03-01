@@ -2,11 +2,13 @@ package cc.mrbird.febs.message.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 信息管理表 Entity
@@ -21,8 +23,8 @@ public class Message {
     /**
      * 信息ID
      */
-    @TableId(value = "MESSAGE_ID", type = IdType.AUTO)
-    private Long messageId;
+    @TableId("MESSAGE_ID")
+    private String messageId;
 
     /**
      * 姓名
@@ -40,7 +42,7 @@ public class Message {
      * 年龄
      */
     @TableField("AGE")
-    private Integer age;
+    private String age;
 
     /**
      * 民族
@@ -49,7 +51,7 @@ public class Message {
     private String nation;
 
     /**
-     * 性别
+     * 性别 0 男 1 女
      */
     @TableField("GENDER")
     private String gender;
@@ -79,6 +81,12 @@ public class Message {
     private String identity;
 
     /**
+     * 地址
+     */
+    @TableField("ADDRESS")
+    private String address;
+
+    /**
      * 在住老人
      */
     @TableField("ELDER")
@@ -97,7 +105,13 @@ public class Message {
     private String remarks;
 
     /**
-     * 状态 0 已保存 1 待审核 2 审核通过 3 退回
+     * 审核人
+     */
+    @TableField("AUDIT_PERSON")
+    private String auditPerson;
+
+    /**
+     * 状态 0 待审核 1 审核通过 2 退回
      */
     @TableField("STATUS")
     private String status;
@@ -105,13 +119,18 @@ public class Message {
     /**
      * 创建时间
      */
-    @TableField("CREATE_DATE")
-    private Date createDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @TableField("CREATE_TIME")
+    private Date createTime;
 
     /**
      * 更新时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @TableField("UPDATE_TIME")
     private Date updateTime;
+
+    private transient String createTimeFrom;
+    private transient String createTimeTo;
 
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.mrbird.febs.message.mapper.MessageMapper">
+
+    <!--根据身份证和电话-->
+    <select id="getStatus" resultType="java.lang.String">
+        SELECT STATUS FROM t_message
+        <where>
+            IDENTITY = #{identity} and PHONE = #{phone}
+        </where>
+    </select>
+
+    <!--根据用户名-->
+    <select id="getStatusByLoginName" resultType="java.lang.String">
+        SELECT STATUS FROM t_message
+        <where>
+            LOGIN_NAME = #{loginName}
+        </where>
+    </select>
+
+    <select id="findByName" parameterType="string" resultType="cc.mrbird.febs.message.entity.Message">
+        select * from t_message where name = #{name}
+    </select>
+</mapper>

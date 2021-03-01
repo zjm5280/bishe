@@ -67,4 +67,10 @@ public interface IRoleService extends IService<Role> {
      * @param roleIds 待删除角色的 id
      */
     void deleteRoles(String roleIds);
+
+    /**
+     * 更新注册用户为家属
+     * @param userId
+     */
+    void updateUserRole(Long userId);
 }
