@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,10 +112,14 @@ public class MessageReportController extends BaseController {
         if (message.getMessageId() == null){
             throw new FebsException("信息ID为空");
         }
+        User user = userService.findByName(message.getName());
         message.setAuditPerson(getCurrentUser().getUsername());
+        message.setUserId(user.getUserId());
         message.setUpdateTime(new Date());
         messageService.updateMessage(message);
-        roleService.updateUserRole((userService.findByName(message.getName())).getUserId());
+        if ((message.getStatus().equals("1")) == true){
+            roleService.updateUserRole(user.getUserId());
+        }
         return new FebsResponse().success();
     }
 

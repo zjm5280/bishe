@@ -52,7 +52,7 @@ public class ViewController extends BaseController {
     @GetMapping("audit/detail/{name}")
     @RequiresPermissions("audit:view")
     public String messageAuditDetail(@PathVariable String name, Model model) {
-        resolveUserModel(name, model, true);
+        resolveUserModel(name, model, false);
         return FebsUtil.view("message/messageDetail");
     }
 

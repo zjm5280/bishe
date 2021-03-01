@@ -83,10 +83,10 @@
     <span>{{ gender.title }}</span>
 </script>
 <script type="text/html" id="message-option">
-    <span shiro:lacksPermission="message:view,message:audit,message:update">
+    <span shiro:lacksPermission="audit1:view,message:audit,message:update">
         <span class="layui-badge-dot febs-bg-orange"></span> 无权限
     </span>
-    <a lay-event="detail" shiro:hasPermission="message:view"><i
+    <a lay-event="detail" shiro:hasPermission="audit1:view"><i
             class="layui-icon febs-edit-area febs-green">&#xe7a5;</i></a>
     <a lay-event="audit" shiro:hasPermission="message:audit"><i
             class="layui-icon febs-edit-area febs-green">&#xe7a5;</i></a>

@@ -127,7 +127,7 @@
 
         layui.febs.get(ctx + "message/getStatusByLoginName", null, function (data) {
             console.log(data.data);
-            if (data.data == "" || data.data == null){debugger
+            if (data.data == "2" || data.data == "" || data.data == null){debugger
                 btn.show();
             }else {
                 btn.hide();
@@ -146,7 +146,7 @@
         form.on('submit(message-report-form-submit)',  function (data) {
             febs.post(ctx + 'message/message', data.field, function () {debugger
                 layer.closeAll();
-                febs.alert.success('信息已提交，会在三个工作日内审核，请等待短信通知！');
+                febs.alert.success('信息已提交，将会在三个工作日内审核！');
                 if (status2 == 0){
                     btn.hide();
                 }

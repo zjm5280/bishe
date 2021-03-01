@@ -27,6 +27,12 @@ public class Message {
     private String messageId;
 
     /**
+     * 用户ID
+     */
+    @TableField("USER_ID")
+    private Long userId;
+
+    /**
      * 姓名
      */
     @TableField("NAME")
